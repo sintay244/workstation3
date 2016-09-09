@@ -1,0 +1,223 @@
+<!Doctype html>
+<html ng-app="app.dashboard">
+<head>
+ <title>MedAssist</title>
+ <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular.min.js"></script>
+ <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script> -->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
+ <link rel="stylesheet" href="/css/dashb.css">
+ <script src="/js/dashboard.js"></script>
+</head> 
+
+<body ng-controller="dashboardController as dCtrl">
+<div class="navbar navbar-inverse navbar-static-top">
+  <div class="container">
+    <a href="#" class="navbar-brand">Home</a>
+    <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    </button>   
+    <div class="collapse navbar-collapse navHeaderCollapse">
+      <ul class="nav navbar-nav navbar-right">
+        <!-- <li class="active"><a href="#">Home</a></li> -->
+        <li><a href="#rx" data-toggle="modal">Rx</a></li>
+        <li><a href="#contact" data-toggle="modal">Add member</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- modal to add family member -->
+<div class="modal fade" id="contact" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>New member registration form</h4>
+      </div>
+      <div class="modal-body">
+
+            <form ng-submit="dCtrl.makeKids()"> 
+            <!-- action="action_page.php" --> 
+            Full Name:<br>
+            <input type="text" placeholder="name" name="name" ng-model="dCtrl.member.name"><br>
+            Allergy:<br>
+            <input type="text" placeholder="Allergy" name="Allergy" ng-model="dCtrl.member.allergy"><br>    
+            Gender:<br>
+            <input type="text" placeholder="Gender" name="Gender" ng-model="dCtrl.member.gender"><br>        
+            Birth Day:<br>
+            <input type="Date" placeholder="Birth Day" name="bday" ng-model="dCtrl.member.bday"><br>
+            DrAppt:<br>
+            <input type="Date" placeholder="Dr Appointment" name="Age" ng-model="dCtrl.member.drAppt"><br>
+            Weight:<br>
+            <input type="text" placeholder="Weight" name="Weight" ng-model="dCtrl.member.weight"><br>
+            Description:<br>
+            <input type="text" placeholder="Description" name="description" ng-model="dCtrl.member.description"><br><br>            
+            <button class="btn btn-primary" type="submit">Add</button>
+            <a class="btn btn-primary" data-dismiss="modal">close</a>
+            </form>
+      </div>
+      <!-- <div class="modal-footer">
+        <a class="btn btn-primary" data-dismiss="modal">close</a>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+             
+
+
+            
+
+               
+   
+<!-- modal to enter rx in to each persons profile 
+ -->
+
+<div class="modal fade" id="rx" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>RX</h4>
+         <div class="modal-body">            
+            <form ng-submit="dCtrl.rxMeds(dCtrl.newMed)"><br> 
+            <select ng-model="dCtrl.newMed.id" ng-options="item._id as item.name for item in dCtrl.kidList"></select><br>
+            <!-- <p>Current Selected Item: {{dCtrl.member._id}}</p><br>    -->       
+            Name of Med:<br>
+            <input type="text" placeholder="Name of Med" name="Name" ng-model="dCtrl.newMed.medName[$index]"><br>
+            Strength <br> 
+            <input type="text" placeholder="Strength" name="Strength" ng-model="dCtrl.newMed.strength"><br>
+            Dosage<br>
+            <input type="text" placeholder="dosage" name="Strength" ng-model="dCtrl.newMed.dosage"><br>
+            Direction:<br>
+            <input type="text" placeholder="direction" name="Name" ng-model="dCtrl.newMed.direction"><br>        
+            
+            <!-- input type="Number" placeholder="Dosage" name="Dosage" ng-model="dCtrl.newMed.dosage"><br>          
+                <label for="repeatSelect">please select </label>
+                <select name="repeatSelect" id="repeatSelect" ng-model="dCtrl.newMed.kidx">
+                  <option ng-repeat="option in dCtrl.kidList" value="{{option.id}}">{{option.name}}</option>
+                </select> -->            
+            <input a class="btn btn-primary" type="submit" value="Add">
+            <a class="btn btn-primary" data-dismiss="modal">close</a>            
+            </form>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <!-- <a class="btn btn-primary" data-dismiss="modal">close</a> -->
+      </div>
+    </div>
+  </div>
+</div>     
+            
+            
+            
+               
+
+            
+
+
+
+
+  <!-- end of modal -->
+<center><div class="container">
+ <div class="jumbotron">
+  <h3>By medicine life may be prolong'd, yet death
+Will seize the Doctor too</h3> 
+
+    <p>Wiiliam Shakespeare</p>
+    
+    <form ng-submit="dCtrl.getAllKids()" > 
+    <!-- <form ng-submit="dCtrl.allMeds()">  -->
+     
+        <div class="col-xs-12">            
+         <table class="table table-bordered">
+             <tr>
+             <th>Name</th>
+             <th>Date of Birth</th>
+             <th>Gender</th>
+             <th>Weight</th>
+             <th>Allergy</th>
+             <th>Health Condition</th>
+             </tr>
+            
+              <tr ng-repeat="item in dCtrl.kidList">
+                 
+                 <td>{{item.name}}<br><h6> Dr.Appt at {{item.drAppt}}</h6></br></td>
+                 <td><wrap>{{item.bday}}</wrap></td>
+                 <td><wrap>{{item.gender}}</wrap></td>
+                 <td><wrap>{{item.weight}}</wrap></td>
+                 <td><wrap>{{item.allergy[$index]}}</wrap></td>
+                 <td><wrap>{{item.description}}</wrap></td>
+                 <!-- span isolate-click>
+                 <td><button class="btn btn-danger" ng-click="remov(item._id)";$event.stopPropagation()>Remove</button></td>
+                 <td><button class="btn btn-warning" ng-click="update(item._id)">update</button></td>
+                 </span>  -->              
+                  
+              </tr>              
+              
+
+           </table>               
+
+              
+                               
+        <input type="submit" value="Check your family">  
+</form>
+</div>             
+
+ <div>
+ <h3>Learn some cool stuff about drugs</h3>
+ </div>      
+
+   <form ng-click="dCtrl.fda(dCtrl.fdData.name)"> 
+   <div id="custom-search-input" >
+               <div class="input-group col-md-12">
+                <input ng-model="dCtrl.fdData.name" type="text" class="form-control" placeholder="Know your drugs "/>              
+                   <span class="input-group-btn">
+                       <button class="btn btn-info" type="click">
+                           <i class="glyphicon glyphicon-search"></i>                          
+                       </button>              
+                   </span>                    
+   </div> 
+
+                    
+
+   </form>  
+  </div>
+   <div>   
+            <select ng-model="dCtrl.KidList.id" ng-options="item.id as item.name for item in dCtrl.kidList"></select> 
+            <button class="btn btn-danger" ng-click="dCtrl.remov(dCtrl.kidList.id)">Remove</button>
+            <button href="#contact" data-toggle="modal" class="btn btn-primary" ng-click="update(dCtrl.KidList.id)">Add</button>
+    </div>
+
+    <div>     
+       <table>
+           <tr>                   
+                <td>{{dCtrl.medList}}</td>          
+
+           </tr>
+       
+       </table>
+    </div>  
+
+      
+</body>
+</html>
+                   
+                           
+
+    
+                  
+
+
+            
+      
+
+
+
+
+
+
+
+
