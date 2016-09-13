@@ -1,0 +1,114 @@
+<!Doctype html>
+<html ng-app="thingsToDo">
+<head>
+ <title>Travel</title>
+ <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular.min.js"></script>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+ <script src="app.controller.js"></script>
+ <script src="factory.app.js"></script>
+ <!-- <link rel="stylesheet" href="style.css"> -->
+ <style>
+body {
+background-image:url("hong-kong1.jpg");
+background-repeat:no-repeat;
+background-size: cover
+}
+#custom-search-input {
+  width:50%;
+}
+</style>
+
+</head>	
+<body ng-controller="safeControl as fun">
+<div class="navbar navbar-inverse navbar-static-top">
+  <div class="container">
+    <a href="#" class="navbar-brand">Travel Smart</a>
+    <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    </button>   
+    <div class="collapse navbar-collapse navHeaderCollapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="index.html">Home</a></li>
+        <li><a href="map.html">Area Map</a></li>
+        <li><a href="#contact" data-toggle="modal">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- modal for contact button -->
+<div class="modal fade" id="contact" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Contact the site</h4>
+      </div>
+      <div class="modal-body">
+        <p>Your feed back is very important for this giant tech company.Thank u</>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary" data-dismiss="modal">close</a>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+
+
+  <!-- end of modal -->
+<center><div class="container">
+ <div class="jumbotron">
+  <h3>We travel not to escape life, but for life not to escape us</h3>
+    <p>Anonymous</p>
+  <!-- <p><a class="btn btn-primary btn-lg" href="index2.html" role="button">Go Explore</a></p> -->
+  <!-- <nav class="navbar navbar-default col-md-4 col-md-offset-4"> -->
+      <!-- <form class="navbar-form navbar-left" role="search"> -->
+        <!-- <div class="form-group"> -->               
+        <!-- <input type="text" class="text" placeholder="Current city" ng-model="fun.city">
+        <button ng-click="fun.funStuff()"  type="submit" class="btn btn-info">Go</button> -->        
+      </div>  
+ <div id="custom-search-input">
+               <div class="input-group col-md-12">
+                   <input ng-model="fun.city" type="text" class="form-control" placeholder="Current City" />
+                   <span class="input-group-btn">
+                       <button ng-click="fun.funStuff()"
+                                                class="btn btn-info" type="button">
+                           <i class="glyphicon glyphicon-search"></i>
+                       </button>
+                   </span>
+               </div>
+
+           </div>
+      
+      <!-- </form>
+    <!-- </nav> -->
+</div>
+</div>
+</center>
+<!-- <form>
+<input type="submit" value="" name="city" ng-model="sCtrl.city"></input>
+</form> -->
+<!-- ***************** output area************************** -->
+
+
+  <div class="container">
+	<!-- <div class="row">
+		<div class="col-xs-12">
+			<h1 class="text-center">The list of things you can do</h1>
+		</div>	
+	</div> -->
+	<div class="row">
+		<div class="col-xs-4" ng-repeat="item in fun.coolData | limitTo : 25">
+			<strong><h3>{{item.title}}</h3></strong>
+			<strong><h5>{{item.supplierName}}</h5></strong>
+			<img src="http:{{item.imageUrl}}">
+		</div>
+	</div>
+</div>
+	
+</body>
+</html>
